@@ -9,8 +9,6 @@ import {
 } from "@apollo/client";
 import { Query } from "@apollo/react-components";
 
-
-
 const NavULWrapper = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -50,14 +48,43 @@ const DropdownImage = styled.img`
     margin-left: 5px;
     `
 const NavButton = styled(NakedButton)`
-display: flex;
-align-items: start;
+    display: flex;
+    align-items: start;
 `;
 
 const ActiveButton = styled(NakedButton)`
-font-weight: ${props => props.active ? '600' : 'regular'};
-color: ${props => props.active ? '#5ECE7B' : '#1D1F22'};
+    font-weight: ${props => props.active ? '600' : 'regular'};
+    color: ${props => props.active ? '#5ECE7B' : '#1D1F22'};
 `;
+
+const NavCurrencyDropdown = styled.div`
+    width: 114px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    top: 70px;
+    right: 80px;
+    z-index: 1;
+
+`;
+
+const CartAndCurrecyWrapper = styled.div` 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    `
+
+const NavDropDownULWrapper = styled(NavULWrapper)`
+    display: flex;
+    justify-content: start;
+    `
 
 
 const CATEGORIES = gql`
@@ -68,12 +95,23 @@ const CATEGORIES = gql`
     }
   `;
 
+const CURRENCIES = gql`
+    query  {
+        currencies{
+            label
+            symbol
+        }
+    }
+  `;
+
 class Header extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             activeIndex: 0,
+            showCurrenciesDropDown: false,
+            currentCurrency: '$'
         }
     }
 
@@ -110,21 +148,42 @@ class Header extends React.Component {
                         </NakedButton>
                     </LogoLI>
                     <li>
-                        <NavULWrapper>
-                            <li>
-                                <NavButton>
+                        <CartAndCurrecyWrapper>
+                            <NavDropDownULWrapper>
+                                <NavButton onClick={() => this.setState({ showCurrenciesDropDown: !this.state.showCurrenciesDropDown })}>
                                     <CurrencyWrapper>
-                                        $
+                                        {this.state.currentCurrency}
                                     </CurrencyWrapper>
                                     <DropdownImage src={navDropdown} alt="dropdown" />
                                 </NavButton>
-                            </li>
-                            <li>
                                 <NakedButton>
                                     <img src={emptyCartLogo} alt="empty cart" />
                                 </NakedButton>
-                            </li>
-                        </NavULWrapper>
+                            </NavDropDownULWrapper>
+                            {
+                                this.state.showCurrenciesDropDown ?
+                                    <NavCurrencyDropdown>
+                                        <Query query={CURRENCIES}>
+                                            {({ loading, error, data }) => {
+                                                if (loading) return <p>Loading...</p>;
+                                                if (error) return <p>Error :(</p>;
+
+                                                return data.currencies.map((currency, index) => {
+                                                    return (
+                                                        <NakedButton key={index} onClick={() => { this.setState({ showCurrenciesDropDown: false, currentCurrency: currency.symbol }) }}>
+                                                            <p >{`${currency.symbol} ${currency.label}`}</p>
+                                                        </NakedButton>
+                                                    )
+                                                })
+                                            }
+                                            }
+                                        </Query>
+                                    </NavCurrencyDropdown>
+                                    : null
+
+                            }
+
+                        </CartAndCurrecyWrapper>
                     </li>
                 </NavULWrapper>
             </nav>

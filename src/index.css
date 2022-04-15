@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "RailwayRegular";
+    src: local("RailwayRegular"),
+        url("./fonts/Railway/Raleway-Regular.ttf") format("truetype");
+}
+
+body {
+    font-family: "RailwayRegular";
+}
