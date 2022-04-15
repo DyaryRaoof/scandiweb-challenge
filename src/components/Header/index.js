@@ -8,32 +8,11 @@ import {
     gql
 } from "@apollo/client";
 import { Query } from "@apollo/react-components";
+import NavULWrapper from './NavULWrapper';
+import NavCategoryButtons from './NavCategoryButtons';
 
-const NavULWrapper = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: ${props => props.margin ? "0 101px" : "0"};
-  list-style: none;
-  background-color: #fff;
-  padding: 15px 0;
-  `
 
-const NavLIWrapper = styled.li`
-font-size: 16px;
-line-height: 19.2px;
-margin: 0 0;
-width: 80px;
-text-align: center;
-`
 
-const ActiveHR = styled.hr`
-    width: 100%;
-    height: 2px;
-    background-color: #5ECE7B;
-    border: none;
-    margin-top: 25px;
-    `
 
 const LogoLI = styled.li`
     padding: 15px 0;
@@ -52,10 +31,7 @@ const NavButton = styled(NakedButton)`
     align-items: start;
 `;
 
-const ActiveButton = styled(NakedButton)`
-    font-weight: ${props => props.active ? '600' : 'regular'};
-    color: ${props => props.active ? '#5ECE7B' : '#1D1F22'};
-`;
+
 
 const NavCurrencyDropdown = styled.div`
     width: 114px;
@@ -87,13 +63,6 @@ const NavDropDownULWrapper = styled(NavULWrapper)`
     `
 
 
-const CATEGORIES = gql`
-    query  {
-     categories{
-       name
-     }
-    }
-  `;
 
 const CURRENCIES = gql`
     query  {
@@ -120,27 +89,7 @@ class Header extends React.Component {
             <nav>
                 <NavULWrapper margin>
                     <li>
-                        <NavULWrapper>
-                            <Query query={CATEGORIES}>
-                                {({ loading, error, data }) => {
-                                    if (loading) return <p>Loading...</p>;
-                                    if (error) return <p>Error :(</p>;
-
-                                    return data.categories.map((category, index) => {
-                                        return (
-
-                                            <NavLIWrapper key={index}>
-                                                <ActiveButton active={this.state.activeIndex === index} onClick={() => this.setState({ activeIndex: index })}>
-                                                    {category.name.toUpperCase()}
-                                                    {this.state.activeIndex === index ? <ActiveHR /> : null}
-                                                </ActiveButton>
-                                            </NavLIWrapper>
-                                        )
-                                    })
-                                }
-                                }
-                            </Query>
-                        </NavULWrapper>
+                        <NavCategoryButtons />
                     </li>
                     <LogoLI>
                         <NakedButton>
