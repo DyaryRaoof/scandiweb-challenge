@@ -4,6 +4,13 @@
         url("./fonts/Railway/Raleway-Regular.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: "RailwayBold";
+    src: local("RailwayBold"),
+        url("./fonts/Railway/Raleway-Bold.ttf") format("truetype");
+}
+
+
 body {
     font-family: "RailwayRegular";
 }

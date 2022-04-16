@@ -25,5 +25,6 @@ export const CartAndCurrecyWrapper = styled.div`
 export const NavDropDownULWrapper = styled(NavULWrapper)`
     display: flex;
     justify-content: start;
+    align-items: flex-start;
     `
 

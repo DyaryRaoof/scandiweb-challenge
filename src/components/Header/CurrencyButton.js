@@ -1,9 +1,8 @@
 import React from 'react';
-import emptyCartLogo from '../../images/empty-cart.png';
 import navDropdown from '../../images/nav-dropdown-icon.png';
 import CurrencyDropDown from './CurrencyDropdown';
 import { CurrencyWrapper, DropdownImage, NavButton, CartAndCurrecyWrapper, NavDropDownULWrapper } from './StyledComponents/CurrencyStyleComponents';
-import NakedButton from '../Shared/StyledComponents/NakedButton';
+import CartButton from './CartButton';
 
 class CurrencyButton extends React.Component {
     constructor(props) {
@@ -31,9 +30,7 @@ class CurrencyButton extends React.Component {
                         </CurrencyWrapper>
                         <DropdownImage src={navDropdown} alt="dropdown" />
                     </NavButton>
-                    <NakedButton>
-                        <img src={emptyCartLogo} alt="empty cart" />
-                    </NakedButton>
+                    <CartButton />
                 </NavDropDownULWrapper>
                 <CurrencyDropDown
                     showCurrenciesDropDown={this.state.showCurrenciesDropDown}
