@@ -5,6 +5,9 @@ import ActiveButton from './StyledComponents/ActiveButton';
 import NavULWrapper from './StyledComponents/NavULWrapper';
 import { Query } from "@apollo/react-components";
 import { gql } from "@apollo/client";
+import { changeCategory } from '../../redux/ui/ui';
+import { connect } from 'react-redux';
+
 const CATEGORIES = gql`
     query  {
      categories{
@@ -33,7 +36,11 @@ class NavCategoryButtons extends React.Component {
                         return (
 
                             <NavLIWrapper key={index}>
-                                <ActiveButton active={this.state.activeIndex === index} onClick={() => this.setState({ activeIndex: index })}>
+                                <ActiveButton active={this.state.activeIndex === index}
+                                    onClick={() => {
+                                        this.setState({ activeIndex: index });
+                                        this.props.changeCategory(category.name);
+                                    }}>
                                     {category.name.toUpperCase()}
                                     {this.state.activeIndex === index ? <ActiveHR /> : null}
                                 </ActiveButton>
@@ -47,4 +54,16 @@ class NavCategoryButtons extends React.Component {
     }
 }
 
-export default NavCategoryButtons;
+const mapStateToProps = (state) => {
+    return {
+        categoryName: state.uiReducer.categoryName,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeCategory: (categoryName) => dispatch(changeCategory(categoryName)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavCategoryButtons);

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { gql } from '@apollo/client';
 import { Query } from '@apollo/react-components';
+import { connect } from "react-redux";
 
 const PageWrapper = styled.div`
   margin: 0 110px;
@@ -32,9 +33,15 @@ const ItemImage = styled.img`
         width: 100%;
         height: 630px;
         `
-const CATEGORY = gql`
+
+
+
+class ProductListPage extends React.Component {
+    render() {
+
+        const CATEGORY = gql`
     query  {
-        category(input:{title:"all"}){
+        category(input:{title:"${this.props.categoryName}"}){
             products{
               id
               name
@@ -59,14 +66,9 @@ const CATEGORY = gql`
           }
     }
     `
-
-
-
-class ProductListPage extends React.Component {
-    render() {
         return (
             <PageWrapper>
-                <h1>Category Name</h1>
+                <h1></h1>
                 <ItemsWrapper>
                     <Query query={CATEGORY}>
                         {({ loading, error, data }) => {
@@ -92,4 +94,8 @@ class ProductListPage extends React.Component {
     }
 }
 
-export default ProductListPage;
+function mapStateToProps(state) {
+    return { categoryName: state.uiReducer.categoryName };
+}
+
+export default connect(mapStateToProps)(ProductListPage);

@@ -6,6 +6,8 @@ import './fonts/Railway/Raleway-Bold.ttf';
 import './fonts/Railway/Raleway-Light.ttf';
 import './fonts/Railway/Raleway-Thin.ttf';
 import './index.css';
+import { Provider } from 'react-redux';
+import store from './redux/configureStore';
 
 import {
   ApolloClient,
@@ -22,7 +24,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ApolloProvider>
   </React.StrictMode>
 );
