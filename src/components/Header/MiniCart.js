@@ -40,7 +40,6 @@ class MiniCart extends React.Component {
             <MiniCartWrapper>
                 <div style={{ display: 'flex' }}>
                     <p style={{ fontFamily: 'RailwayBold', marginRight: '3px' }}>My Bag,</p>
-                    {' '}
                     <p>2 items</p>
                 </div>
                 {

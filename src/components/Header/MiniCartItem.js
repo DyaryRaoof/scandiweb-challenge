@@ -11,6 +11,13 @@ import {
 } from './StyledComponents/MiniCartItem';
 
 class MiniCartItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cart: []
+        }
+    }
+
     render = () => {
         return (
             <MiniCartItemDiv>

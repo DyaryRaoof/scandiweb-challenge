@@ -7,13 +7,22 @@ import Badge from './StyledComponents/Badge';
 
 
 class CartButton extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showMiniCart: false
+        }
+    }
+
     render = () => {
         return <div>
-            <NakedButton>
+            <NakedButton onClick={() => { this.setState({ showMiniCart: !this.state.showMiniCart }) }}>
                 <Badge>3</Badge>
                 <img src={emptyCartLogo} alt="empty cart" />
             </NakedButton>
-            <MiniCart />
+            {
+                this.state.showMiniCart && <MiniCart />
+            }
         </div>
 
 
