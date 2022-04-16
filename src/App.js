@@ -1,11 +1,15 @@
 
 import React from 'react';
 import Header from './components/Header';
+import ProductListPage from './components/ProductListingPage';
 
 class App extends React.Component {
   render() {
     return (
-      <Header />
+      <div>
+        <Header />
+        <ProductListPage />
+      </div>
     );
   }
 }

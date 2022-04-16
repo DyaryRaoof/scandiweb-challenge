@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './fonts/Railway/Raleway-Regular.ttf';
 import './fonts/Railway/Raleway-Bold.ttf';
+import './fonts/Railway/Raleway-Light.ttf';
+import './fonts/Railway/Raleway-Thin.ttf';
 import './index.css';
 
 import {
