@@ -2,8 +2,8 @@ import React from 'react';
 import emptyCartLogo from '../../images/empty-cart.png';
 import navDropdown from '../../images/nav-dropdown-icon.png';
 import CurrencyDropDown from './CurrencyDropdown';
-import { CurrencyWrapper, DropdownImage, NavButton, CartAndCurrecyWrapper, NavDropDownULWrapper } from './CurrencyStyleComponents';
-import NakedButton from '../Shared/NakedButton';
+import { CurrencyWrapper, DropdownImage, NavButton, CartAndCurrecyWrapper, NavDropDownULWrapper } from './StyledComponents/CurrencyStyleComponents';
+import NakedButton from '../Shared/StyledComponents/NakedButton';
 
 class CurrencyButton extends React.Component {
     constructor(props) {

@@ -1,10 +1,10 @@
 import React from 'react'
 import logo from '../../images/logo.png';
-import NakedButton from '../Shared/NakedButton';
-import NavULWrapper from './NavULWrapper';
+import NakedButton from '../Shared/StyledComponents/NakedButton';
+import NavULWrapper from './StyledComponents/NavULWrapper';
 import NavCategoryButtons from './NavCategoryButtons';
 import CurrencyButton from './CurrencyButton';
-import LogoLI from './LogoLI';
+import LogoLI from './StyledComponents/LogoLI';
 
 
 class Header extends React.Component {

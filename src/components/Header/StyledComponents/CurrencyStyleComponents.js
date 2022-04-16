@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import NakedButton from '../Shared/NakedButton';
+import NakedButton from '../../Shared/StyledComponents/NakedButton';
 import NavULWrapper from './NavULWrapper';
 
 export const CurrencyWrapper = styled.span`

@@ -1,8 +1,8 @@
 import React from 'react';
-import NavLIWrapper from './NavLIWrapper';
-import ActiveHR from './ActiveHR';
-import ActiveButton from './ActiveButton';
-import NavULWrapper from './NavULWrapper';
+import NavLIWrapper from './StyledComponents/NavLIWrapper';
+import ActiveHR from './StyledComponents/ActiveHR';
+import ActiveButton from './StyledComponents/ActiveButton';
+import NavULWrapper from './StyledComponents/NavULWrapper';
 import { Query } from "@apollo/react-components";
 import { gql } from "@apollo/client";
 const CATEGORIES = gql`

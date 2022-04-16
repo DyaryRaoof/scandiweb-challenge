@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import NakedButton from '../Shared/NakedButton';
+import NakedButton from '../../Shared/StyledComponents/NakedButton';
 
 export default styled(NakedButton)`
 font-weight: ${props => props.active ? '600' : 'regular'};

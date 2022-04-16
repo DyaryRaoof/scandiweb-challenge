@@ -1,8 +1,8 @@
 import React from "react";
 import { Query } from "@apollo/react-components";
 import { gql } from "@apollo/client";
-import NakedButton from "../Shared/NakedButton";
-import NavCurrencyDropdown from "./NavCurrencyDropdown";
+import NakedButton from "../Shared/StyledComponents/NakedButton";
+import NavCurrencyDropdown from "./StyledComponents/NavCurrencyDropdown";
 
 const CURRENCIES = gql`
     query  {
