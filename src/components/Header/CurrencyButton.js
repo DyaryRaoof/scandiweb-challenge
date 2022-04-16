@@ -3,6 +3,8 @@ import navDropdown from '../../images/nav-dropdown-icon.png';
 import CurrencyDropDown from './CurrencyDropdown';
 import { CurrencyWrapper, DropdownImage, NavButton, CartAndCurrecyWrapper, NavDropDownULWrapper } from './StyledComponents/CurrencyStyleComponents';
 import CartButton from './CartButton';
+import { changeCurrency } from '../../redux/ui/ui';
+import { connect } from 'react-redux';
 
 class CurrencyButton extends React.Component {
     constructor(props) {
@@ -24,7 +26,10 @@ class CurrencyButton extends React.Component {
         return (
             <CartAndCurrecyWrapper>
                 <NavDropDownULWrapper>
-                    <NavButton onClick={() => this.setState({ showCurrenciesDropDown: !this.state.showCurrenciesDropDown })}>
+                    <NavButton onClick={
+                        () => {
+                            this.setState({ showCurrenciesDropDown: !this.state.showCurrenciesDropDown });
+                        }}>
                         <CurrencyWrapper>
                             {this.state.currentCurrency}
                         </CurrencyWrapper>
@@ -34,10 +39,24 @@ class CurrencyButton extends React.Component {
                 </NavDropDownULWrapper>
                 <CurrencyDropDown
                     showCurrenciesDropDown={this.state.showCurrenciesDropDown}
-                    currencyChanged={(currency) => this.handleCurrencyChanged(currency)} />
+                    currencyChanged={(currency) => {
+                        this.handleCurrencyChanged(currency);
+                        this.props.changeCurrency(currency);
+                    }
+                    } />
             </CartAndCurrecyWrapper>
         )
     }
 }
 
-export default CurrencyButton;
+const mapStateToProps = (state) => {
+    return {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeCurrency: (currency) => dispatch(changeCurrency(currency)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencyButton);
