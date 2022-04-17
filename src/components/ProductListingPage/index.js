@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import NakedButton from '../Shared/StyledComponents/NakedButton';
 import categoryQuery from './query';
 import { PageWrapper, ItemCard, ItemsWrapper, ItemImage } from './StyledComponents';
+import { withRouter } from '../withRouter';
 
 
 class ProductListPage extends React.Component {
@@ -24,7 +25,7 @@ class ProductListPage extends React.Component {
                                 return (
 
                                     <ItemCard key={product.id}>
-                                        <NakedButton >
+                                        <NakedButton onClick={() => { this.props.navigate(`/product-description/${product.id}`) }}>
                                             <ItemImage src={product.gallery[0]} alt="item" />
                                             <p style={{ textAlign: 'left', width: '100%', fontFamily: 'RailwayThin' }}>{product.name}</p>
                                             <p
@@ -48,4 +49,4 @@ function mapStateToProps(state) {
     return { categoryName: state.uiReducer.categoryName, currency: state.uiReducer.currency };
 }
 
-export default connect(mapStateToProps)(ProductListPage);
+export default connect(mapStateToProps)(withRouter(ProductListPage));
