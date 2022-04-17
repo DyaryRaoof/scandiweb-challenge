@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import emptyCartLogo from '../../images/empty-cart.png';
 import NakedButton from '../Shared/StyledComponents/NakedButton';
 import MiniCart from "./MiniCart";
@@ -17,7 +18,7 @@ class CartButton extends React.Component {
     render = () => {
         return <div>
             <NakedButton onClick={() => { this.setState({ showMiniCart: !this.state.showMiniCart }) }}>
-                <Badge>3</Badge>
+                {this.props.cartItemsLength > 0 && (<Badge>{this.props.cartItemsLength}</Badge>)}
                 <img src={emptyCartLogo} alt="empty cart" />
             </NakedButton>
             {
@@ -29,4 +30,10 @@ class CartButton extends React.Component {
     }
 }
 
-export default CartButton;
+const mapStateToProps = (state) => {
+    return {
+        cartItemsLength: state.cartReducer.cartItems.length
+    }
+}
+
+export default connect(mapStateToProps)(CartButton);

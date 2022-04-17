@@ -10,5 +10,5 @@ export default styled.div`
     height: 14px;
     position: absolute;
     top: 35px;
-    right: 110px;
+    right: 100px;
 `;
