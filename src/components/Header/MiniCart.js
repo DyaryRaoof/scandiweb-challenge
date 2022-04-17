@@ -1,55 +1,37 @@
 import React from "react";
 
 import MiniCartItem from "./MiniCartItem";
-import { MiniCartWrapper } from './StyledComponents/MiniCart';
-import styled from 'styled-components';
-
-const TotalPrice = styled.div`
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    font-family:  'RailwayBold';
-`;
-
-const MiniCartButton = styled.button`
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    font-family:  'RailwayBold';
-    border: 1px solid black;
-    width: 150px;
-    cursor: pointer;
-    background-color: white;
-`;
-
-const CheckOutButton = styled(MiniCartButton)`
-    background-color: #5ECE7B;
-    color: white;
-    `
-
-
+import { MiniCartWrapper, TotalPrice, MiniCartButton, CheckOutButton } from './StyledComponents/MiniCart';
+import { connect } from "react-redux";
+import { decreaseProductQuantity, increaseProductQuantity } from "../../redux/cart/cart";
 
 class MiniCart extends React.Component {
+    getTotalPrice = () => {
+        if (this.props.cartItems) {
+            const products = this.props.cartItems.map(item => item.product);
+            const currentCurrency = this.props.currency;
+            const prices = products.map(product => product.prices.find(price => price.currency.symbol === currentCurrency));
+            const priceValues = prices.map(price => price.amount).map((amount, index) => amount * this.props.cartItems[index].quantity);
+            return priceValues.reduce((a, b) => { return a + b }, 0);
+        }
+
+    }
+
     render = () => {
         return (
             <MiniCartWrapper>
                 <div style={{ display: 'flex' }}>
                     <p style={{ fontFamily: 'RailwayBold', marginRight: '3px' }}>My Bag,</p>
-                    <p>2 items</p>
+                    <p>{this.props.cartItems.length} items</p>
                 </div>
                 {
-                    [1, 2, 3].map(item => {
-                        return <MiniCartItem />
+                    this.props.cartItems.map(item => {
+                        return <MiniCartItem key={item.id} item={item} currency={this.props.currency} />
                     })
                 }
                 <TotalPrice>
                     <p>Total</p>
-                    <p>$76.00</p>
+                    <p>{`${this.props.currency} ${this.getTotalPrice()}`}</p>
                 </TotalPrice>
                 <div style={{ display: 'flex', justifyContent: "space-between" }}>
                     <MiniCartButton>VIEW BAG</MiniCartButton>
@@ -60,4 +42,18 @@ class MiniCart extends React.Component {
     }
 }
 
-export default MiniCart;
+const mapStateToProps = (state) => {
+    return {
+        cartItems: state.cartReducer.cartItems,
+        currency: state.uiReducer.currency,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        increaseProductQuantity: (id) => dispatch(increaseProductQuantity(id)),
+        decreaseProductQuatity: (id) => dispatch(decreaseProductQuantity(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);

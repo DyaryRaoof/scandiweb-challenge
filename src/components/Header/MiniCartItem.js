@@ -9,18 +9,23 @@ import {
     MiniCartRightColumnDiv,
     SMIICons
 } from './StyledComponents/MiniCartItem';
+import { connect } from 'react-redux';
+import { decreaseProductQuantity, increaseProductQuantity } from '../../redux/cart/cart';
+import NakedButton from '../Shared/StyledComponents/NakedButton';
 
 class MiniCartItem extends React.Component {
     render = () => {
+        const product = this.props.item.product;
         return (
             <MiniCartItemDiv>
                 <MiniCartLeftCAndMiddleColumnDiv>
                     <MiniCartRightColumnDiv>
                         <div>
-                            <MiniCartParagraph>Jupiter</MiniCartParagraph>
-                            <MiniCartParagraph>Wayfarer</MiniCartParagraph>
+                            <MiniCartParagraph>{product.name}</MiniCartParagraph>
+                            <MiniCartParagraph>{product.brand}</MiniCartParagraph>
                         </div>
-                        <MiniCartParagraph>$76.00</MiniCartParagraph>
+                        <MiniCartParagraph>{`${this.props.currency} ${product.prices
+                            .find(price => price.currency.symbol === this.props.currency).amount}`}</MiniCartParagraph>
                         <div style={{ display: 'flex' }}>
                             <SMIICons>
                                 S
@@ -31,9 +36,13 @@ class MiniCartItem extends React.Component {
                         </div>
                     </MiniCartRightColumnDiv>
                     <MiniCartPlusMinusSquares>
-                        <img src={plusSquare} alt="minus square" />
-                        <p>2</p>
-                        <img src={minusSquare} alt="minus square" />
+                        <NakedButton onClick={() => { this.props.increaseProductQuantity(this.props.item.id) }}>
+                            <img src={plusSquare} alt="minus square" />
+                        </NakedButton>
+                        <p>{this.props.item.quantity}</p>
+                        <NakedButton onClick={() => { this.props.decreaseProductQuantity(this.props.item.id) }}>
+                            <img src={minusSquare} alt="minus square" />
+                        </NakedButton>
                     </MiniCartPlusMinusSquares>
                 </MiniCartLeftCAndMiddleColumnDiv>
                 <img src={plusSquare} alt="plus-square-icon" />
@@ -42,4 +51,15 @@ class MiniCartItem extends React.Component {
     }
 }
 
-export default MiniCartItem;
+const mapStateToProps = (state) => {
+    return {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        decreaseProductQuantity: (id) => dispatch(decreaseProductQuantity(id)),
+        increaseProductQuantity: (id) => dispatch(increaseProductQuantity(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCartItem);

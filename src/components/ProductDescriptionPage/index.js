@@ -15,7 +15,6 @@ class ProductDescriptionPage extends React.Component {
         }
     }
 
-
     render() {
         const { id } = this.props.params;
         const PRODUCT = productQuery(id);
@@ -24,13 +23,14 @@ class ProductDescriptionPage extends React.Component {
                 {({ loading, error, data }) => {
                     if (loading) return <p>Loading...</p>;
                     if (error) return <p>Error :(</p>;
+
                     return (
                         <PageWrapper>
                             <SideImagesDiv>
                                 {
                                     data.product.gallery.map((image, index) => {
-                                        return <NakedButton onClick={() => { this.setState({ activeImageIndex: index }) }}>
-                                            <SideImage key={index} src={image} alt="item" />
+                                        return <NakedButton key={index} onClick={() => { this.setState({ activeImageIndex: index }); }}>
+                                            <SideImage src={image} alt="item" />
                                         </NakedButton>
                                     })
                                 }
