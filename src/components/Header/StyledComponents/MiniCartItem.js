@@ -38,5 +38,5 @@ border: 1px solid black;
 text-align: center;
 margin-right: 10px;
 font-size: 12px;
-background-color: ${props => props.active ? '#A6A6A6' : '#fff'};
+background-color: ${props => props.backgroundColor};
 `;

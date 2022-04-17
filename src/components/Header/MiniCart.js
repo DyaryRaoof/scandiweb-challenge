@@ -25,8 +25,8 @@ class MiniCart extends React.Component {
                     <p>{this.props.cartItems.length} items</p>
                 </div>
                 {
-                    this.props.cartItems.map(item => {
-                        return <MiniCartItem key={item.id} item={item} currency={this.props.currency} />
+                    this.props.cartItems.map((item, index) => {
+                        return <MiniCartItem key={index} item={item} currency={this.props.currency} />
                     })
                 }
                 <TotalPrice>

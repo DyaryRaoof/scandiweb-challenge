@@ -27,12 +27,15 @@ class MiniCartItem extends React.Component {
                         <MiniCartParagraph>{`${this.props.currency} ${product.prices
                             .find(price => price.currency.symbol === this.props.currency).amount}`}</MiniCartParagraph>
                         <div style={{ display: 'flex' }}>
-                            <SMIICons>
-                                S
-                            </SMIICons>
-                            <SMIICons active>
-                                M
-                            </SMIICons>
+                            {product.attributes.map((attribute, index) => {
+                                const isSwatch = attribute.type === 'swatch';
+                                const displayValue = attribute.items[this.props.item.attributes[index]].value;
+                                const backgroundColor = isSwatch ? displayValue : 'white';
+                                return <SMIICons backgroundColor={backgroundColor}>
+                                    {isSwatch ? '' : displayValue}
+                                </SMIICons>
+                            })}
+
                         </div>
                     </MiniCartRightColumnDiv>
                     <MiniCartPlusMinusSquares>
@@ -45,7 +48,7 @@ class MiniCartItem extends React.Component {
                         </NakedButton>
                     </MiniCartPlusMinusSquares>
                 </MiniCartLeftCAndMiddleColumnDiv>
-                <img src={plusSquare} alt="plus-square-icon" />
+                <img src={product.gallery[0]} alt="plus-square-icon" />
             </MiniCartItemDiv>
         )
     }
