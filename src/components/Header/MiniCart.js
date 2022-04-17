@@ -4,6 +4,7 @@ import MiniCartItem from "./MiniCartItem";
 import { MiniCartWrapper, TotalPrice, MiniCartButton, CheckOutButton } from './StyledComponents/MiniCart';
 import { connect } from "react-redux";
 import { decreaseProductQuantity, increaseProductQuantity } from "../../redux/cart/cart";
+import { withRouter } from "../withRouter";
 
 class MiniCart extends React.Component {
     getTotalPrice = () => {
@@ -34,7 +35,7 @@ class MiniCart extends React.Component {
                     <p>{`${this.props.currency} ${this.getTotalPrice()}`}</p>
                 </TotalPrice>
                 <div style={{ display: 'flex', justifyContent: "space-between" }}>
-                    <MiniCartButton>VIEW BAG</MiniCartButton>
+                    <MiniCartButton onClick={() => { this.props.navigate('/cart') }}>VIEW BAG</MiniCartButton>
                     <CheckOutButton>CHECK OUT</CheckOutButton>
                 </div>
             </MiniCartWrapper>
@@ -56,4 +57,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MiniCart));
