@@ -1,0 +1,36 @@
+@font-face {
+    font-family: "RailwayRegular";
+    src: local("RailwayRegular"),
+        url("./fonts/Railway/Raleway-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RailwayBold";
+    src: local("RailwayBold"),
+        url("./fonts/Railway/Raleway-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RailwayLight";
+    src: local("RailwayLight"),
+        url("./fonts/Railway/Raleway-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RailwayThin";
+    src: local("RailwayThin"),
+        url("./fonts/Railway/Raleway-Thin.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RobotoCondesedBold";
+    src: local("RobotoCondesedBold"),
+        url("./fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf") format("truetype");
+}
+
+
+
+
+body {
+    font-family: "RailwayRegular";
+}
