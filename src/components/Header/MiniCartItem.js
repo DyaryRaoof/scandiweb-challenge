@@ -36,7 +36,7 @@ class MiniCartItem extends React.Component {
                         </div>
                         <MiniCartParagraph
                             isCart={this.props.isCart}
-                            fontFamily={isCart ? "RailwayBold" : ''}
+                            fontFamily="RailwayBold"
                             fontSize={isCart ? '24px' : 'large'}>
                             {`${this.props.currency} ${product.prices
                                 .find(price => price.currency.symbol === this.props.currency).amount}`}
