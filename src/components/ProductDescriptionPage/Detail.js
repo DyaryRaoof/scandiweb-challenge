@@ -56,6 +56,7 @@ class Detail extends React.Component {
     }
 
     render = () => {
+        const price = this.props.product.prices.find(price => price.currency.symbol === this.props.currency);
         return (
             <DescriptionWrappper>
                 <h1 style={{ margin: 0 }}>{this.props.product.name}</h1>
@@ -95,7 +96,7 @@ class Detail extends React.Component {
                 })}
                 <PriceParagraph marginTop="30" marginBottom="0">Price:</PriceParagraph>
                 <PriceParagraph marginTop="0" marginBottom="30">
-                    {`${this.props.product.prices[0].currency.symbol} ${this.props.product.prices[0].amount}`}
+                    {`${price.currency.symbol} ${price.amount}`}
                 </PriceParagraph>
                 <AddToCartButton onClick={() => {
                     this.handleAddToCart(this.props.product);
@@ -111,6 +112,7 @@ class Detail extends React.Component {
 const mapStateToProps = (state) => {
     return {
         cartItems: state.cartReducer.cartItems,
+        currency: state.uiReducer.currency,
     }
 }
 
