@@ -17,8 +17,8 @@ export const SideImage = styled.img`
 
 
 export const ManinImage = styled.img`
-    width: 1100px;
-    height: 1100px;
+    width: 50%;
+    height: 50%;
     object-fit: cover;
     object-position: 0% 0%;
 
