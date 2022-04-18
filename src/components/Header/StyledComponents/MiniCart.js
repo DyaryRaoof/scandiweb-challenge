@@ -8,8 +8,7 @@ export const MiniCartWrapper = styled.div`
     background-color: #fff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 10px 10px;
-    
-
+    z-index: 999;
 `;
 
 export const TotalPrice = styled.div`

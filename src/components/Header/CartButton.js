@@ -4,6 +4,7 @@ import emptyCartLogo from '../../images/empty-cart.png';
 import NakedButton from '../Shared/StyledComponents/NakedButton';
 import MiniCart from "./MiniCart";
 import Badge from './StyledComponents/Badge';
+import { showOverlay } from '../../redux/ui/ui';
 
 
 
@@ -17,7 +18,10 @@ class CartButton extends React.Component {
 
     render = () => {
         return <div>
-            <NakedButton onClick={() => { this.setState({ showMiniCart: !this.state.showMiniCart }) }}>
+            <NakedButton onClick={() => {
+                this.setState({ showMiniCart: !this.state.showMiniCart });
+                this.props.showOverlay(!this.state.showMiniCart);
+            }}>
                 {this.props.cartItemsLength > 0 && (<Badge>{this.props.cartItemsLength}</Badge>)}
                 <img src={emptyCartLogo} alt="empty cart" />
             </NakedButton>
@@ -32,8 +36,16 @@ class CartButton extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        cartItemsLength: state.cartReducer.cartItems.length
+        cartItemsLength: state.cartReducer.cartItems.length,
+        showOverlay: state.uiReducer.showOverlay,
     }
 }
 
-export default connect(mapStateToProps)(CartButton);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showOverlay: (show) => dispatch(showOverlay(show))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartButton);
