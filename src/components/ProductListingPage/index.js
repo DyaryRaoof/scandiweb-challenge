@@ -1,30 +1,10 @@
 import React from 'react';
 import { Query } from '@apollo/react-components';
 import { connect } from "react-redux";
-import NakedButton from '../Shared/StyledComponents/NakedButton';
 import categoryQuery from './query';
-import { PageWrapper, ItemCard, ItemsWrapper, ItemImage } from './StyledComponents';
+import { PageWrapper, ItemCard, ItemsWrapper, ItemImage, OutOfStockDiv, OutOfStockHeader, ItemCardButton } from './StyledComponents';
 import { withRouter } from '../withRouter';
-import styled from 'styled-components';
 
-const OutOfStockDiv = styled.div`
-    font-size: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    `
-
-const ItemCardButton = styled(NakedButton)`
-    opacity: ${props => !props.inStock ? 0.5 : 1};
-`
-
-const OutOfStockHeader = styled.h1`
-    z-index: 100;
-    position: absolute;
-    opacity: ${props => props.inStock ? 1 : 0.5};
-    color: gray;
-`
 
 
 
