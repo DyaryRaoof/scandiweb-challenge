@@ -10,7 +10,7 @@ import {
     SMIICons
 } from './StyledComponents/MiniCartItem';
 import { connect } from 'react-redux';
-import { decreaseProductQuantity, increaseProductQuantity } from '../../redux/cart/cart';
+import { decreaseProductQuantity, increaseProductQuantity, removeProduct } from '../../redux/cart/cart';
 import NakedButton from '../Shared/StyledComponents/NakedButton';
 
 class MiniCartItem extends React.Component {
@@ -61,7 +61,13 @@ class MiniCartItem extends React.Component {
                             <img style={{ width: isCart ? '40px' : '32px' }} src={plusSquare} alt="minus square" />
                         </NakedButton>
                         <p>{this.props.item.quantity}</p>
-                        <NakedButton onClick={() => { this.props.decreaseProductQuantity(this.props.item.id) }}>
+                        <NakedButton onClick={() => {
+                            if (this.props.item.quantity > 1) {
+                                this.props.decreaseProductQuantity(this.props.item.id)
+                            } else {
+                                this.props.removeProduct(this.props.item.id)
+                            }
+                        }}>
                             <img style={{ width: isCart ? '40px' : '32px' }} src={minusSquare} alt="minus square" />
                         </NakedButton>
                     </MiniCartPlusMinusSquares>
@@ -73,13 +79,16 @@ class MiniCartItem extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        cartItems: state.cartReducer.cartItems,
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         decreaseProductQuantity: (id) => dispatch(decreaseProductQuantity(id)),
-        increaseProductQuantity: (id) => dispatch(increaseProductQuantity(id))
+        increaseProductQuantity: (id) => dispatch(increaseProductQuantity(id)),
+        removeProduct: (id) => dispatch(removeProduct(id))
     }
 }
 
