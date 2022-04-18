@@ -58,11 +58,11 @@ class MiniCartItem extends React.Component {
                 <div style={{ display: 'flex' }}>
                     <MiniCartPlusMinusSquares>
                         <NakedButton onClick={() => { this.props.increaseProductQuantity(this.props.item.id) }}>
-                            <img style={{ width: isCart ? '40px' : '23px' }} src={plusSquare} alt="minus square" />
+                            <img style={{ width: isCart ? '40px' : '32px' }} src={plusSquare} alt="minus square" />
                         </NakedButton>
                         <p>{this.props.item.quantity}</p>
                         <NakedButton onClick={() => { this.props.decreaseProductQuantity(this.props.item.id) }}>
-                            <img style={{ width: isCart ? '40px' : '23px' }} src={minusSquare} alt="minus square" />
+                            <img style={{ width: isCart ? '40px' : '32px' }} src={minusSquare} alt="minus square" />
                         </NakedButton>
                     </MiniCartPlusMinusSquares>
                     <img style={{ width: isCart ? '200px' : '120px', height: isCart ? '200px' : '140px', objectFit: 'cover', objectPosition: '0% 0%' }} src={product.gallery[0]} alt="plus-square-icon" />

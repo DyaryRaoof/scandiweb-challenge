@@ -26,21 +26,23 @@ export const MiniCartPlusMinusSquares = styled.div`
     justify-content: space-between;
     flex-direction: column;
     margin-right: 20px;
+    align-items:  center;
     
 `;
 
 export const MiniCartRightColumnDiv = styled(MiniCartPlusMinusSquares)`
+    align-items:  flex-start;
 `
 
 export const SMIICons = styled.div`
-    width: ${props => props.isCart ? '40px' : '15px'} ;
-    height: ${props => props.isCart ? '30px' : '15px'} ;
+    width: ${props => props.isCart ? '40px' : '24px'} ;
+    height: ${props => props.isCart ? '30px' : '24px'} ;
     margin-right: 10px;
     padding: 3px;
     border: 1px solid black;
     text-align: center;
-    margin-right: 10px;
-    font-size: 12px;
+    margin-right: 9px;
+    font-size: ${props => props.isCart ? '12px' : '9px'};
     background-color: ${props => props.backgroundColor};
     display: flex;
     justify-content: center;
