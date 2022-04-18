@@ -5,7 +5,9 @@ https://github.com/scandiweb/junior-react-endpoint
 
 ## Run The App
 
-- first install and run the backend
+- First install and run the backend
+- Install the dependencies using: 
+## `npm install`
 - In the project directory, you can run:
 
 ### `npm start`
