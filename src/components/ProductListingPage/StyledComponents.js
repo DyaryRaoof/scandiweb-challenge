@@ -8,7 +8,7 @@ export const ItemCard = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
     background-color: #fff;
     &:hover {
         box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
