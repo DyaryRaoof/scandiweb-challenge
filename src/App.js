@@ -16,15 +16,13 @@ const OverlayDiv = styled.div`
     right: 0;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 100;
 `;
 
 
 class App extends React.Component {
 
   render() {
-    console.log(this.props.showOverlay);
-
     return (
       <div style={this.props.showOverlay ? { overflow: 'hidden', height: '98vh' } : {}}>
         <Router>
