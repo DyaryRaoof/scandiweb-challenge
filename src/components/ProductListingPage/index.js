@@ -16,7 +16,7 @@ const OutOfStockDiv = styled.div`
     `
 
 const ItemCardButton = styled(NakedButton)`
-    opacity: ${props => props.inStock ? 0.5 : 1};
+    opacity: ${props => !props.inStock ? 0.5 : 1};
 `
 
 const OutOfStockHeader = styled.h1`
@@ -47,7 +47,7 @@ class ProductListPage extends React.Component {
 
                                     <ItemCard key={product.id}>
                                         <OutOfStockDiv>
-                                            <OutOfStockHeader inStock={product.inStock}>{product.inStock ? 'Out of stock' : ''}</OutOfStockHeader>
+                                            <OutOfStockHeader inStock={product.inStock}>{!product.inStock ? 'Out of stock' : ''}</OutOfStockHeader>
                                             <div style={{ zIndex: 1 }}>
                                                 <ItemCardButton onClick={() => { this.props.navigate(`/product-description/${product.id}`) }} inStock={product.inStock}>
                                                     <ItemImage src={product.gallery[0]} alt="item" />
