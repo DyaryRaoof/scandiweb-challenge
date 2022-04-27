@@ -99,7 +99,9 @@ class Detail extends React.Component {
                     {`${price.currency.symbol} ${price.amount}`}
                 </PriceParagraph>
                 <AddToCartButton onClick={() => {
-                    this.handleAddToCart(this.props.product);
+                    if (this.props.product.inStock) {
+                        this.handleAddToCart(this.props.product);
+                    }
                 }}>
                     ADD TO CART
                 </AddToCartButton>
