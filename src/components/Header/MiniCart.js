@@ -32,7 +32,7 @@ class MiniCart extends React.Component {
                 }
                 <TotalPrice>
                     <p>Total</p>
-                    <p>{`${this.props.currency} ${this.getTotalPrice()}`}</p>
+                    <p>{`${this.props.currency} ${this.getTotalPrice().toFixed(2)}`}</p>
                 </TotalPrice>
                 <div style={{ display: 'flex', justifyContent: "space-between" }}>
                     <MiniCartButton onClick={() => { this.props.navigate('/cart') }}>VIEW BAG</MiniCartButton>

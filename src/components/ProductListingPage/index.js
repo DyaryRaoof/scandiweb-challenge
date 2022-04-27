@@ -15,7 +15,7 @@ class ProductListPage extends React.Component {
 
         return (
             <PageWrapper>
-                <h1>{this.props.categoryName}</h1>
+                <h1>{this.props.categoryName.toUpperCase()}</h1>
                 <ItemsWrapper>
                     <Query query={CATEGORY}>
                         {({ loading, error, data }) => {
