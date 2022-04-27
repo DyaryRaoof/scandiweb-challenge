@@ -7,6 +7,7 @@ import { Query } from "@apollo/react-components";
 import { gql } from "@apollo/client";
 import { changeCategory } from '../../redux/ui/ui';
 import { connect } from 'react-redux';
+import { withRouter } from '../withRouter';
 
 const CATEGORIES = gql`
     query  {
@@ -40,6 +41,7 @@ class NavCategoryButtons extends React.Component {
                                     onClick={() => {
                                         this.setState({ activeIndex: index });
                                         this.props.changeCategory(category.name);
+                                        this.props.navigate('/');
                                     }}>
                                     {category.name.toUpperCase()}
                                     {this.state.activeIndex === index ? <ActiveHR /> : null}
@@ -66,4 +68,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavCategoryButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavCategoryButtons));
