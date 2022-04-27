@@ -6,7 +6,7 @@ import NakedButton from '../Shared/StyledComponents/NakedButton';
 import Detail from './Detail';
 import { PageWrapper, SideImage, ManinImage, SideImagesDiv } from './IndexStyledComponents';
 
-class ProductDescriptionPage extends React.Component {
+class ProductDescriptionPage extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -18,6 +18,7 @@ class ProductDescriptionPage extends React.Component {
     render() {
         const { id } = this.props.params;
         const PRODUCT = productQuery(id);
+        const { activeImageIndex } = this.state;
         return (
             <Query query={PRODUCT}>
                 {({ loading, error, data }) => {
@@ -35,7 +36,7 @@ class ProductDescriptionPage extends React.Component {
                                     })
                                 }
                             </SideImagesDiv>
-                            <ManinImage src={data.product.gallery[this.state.activeImageIndex]} alt="item" />
+                            <ManinImage src={data.product.gallery[activeImageIndex]} alt="item" />
                             <Detail product={data.product} />
                         </PageWrapper>
                     )

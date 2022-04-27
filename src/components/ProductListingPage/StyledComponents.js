@@ -16,20 +16,22 @@ export const ItemCard = styled.div`
         box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
         border-radius: 5px;
     };
-    max-width: 600px;
-    max-height: 680px;
+    max-width: 300px;
+    max-height: 300px;
     `
 
 export const ItemsWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
     `
 
 export const ItemImage = styled.img`
         overflow: hidden;
         object-fit: contain;
-        width: 100%;
-        height: 630px;
+        width: 280px;
+        height: 280px;
         `
 
 export const OutOfStockDiv = styled.div`

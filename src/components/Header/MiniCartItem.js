@@ -13,10 +13,11 @@ import { connect } from 'react-redux';
 import { decreaseProductQuantity, increaseProductQuantity, removeProduct } from '../../redux/cart/cart';
 import NakedButton from '../Shared/StyledComponents/NakedButton';
 
-class MiniCartItem extends React.Component {
+class MiniCartItem extends React.PureComponent {
     render = () => {
-        const product = this.props.item.product;
-        const isCart = this.props.isCart;
+        const { item, isCart, currency, increaseProductQuantity, decreaseProductQuantity, removeProduct } = this.props;
+        const product = item.product;
+
         return (
             <MiniCartItemDiv isCart={isCart}>
                 <MiniCartLeftCAndMiddleColumnDiv isCart={isCart}>
@@ -35,16 +36,16 @@ class MiniCartItem extends React.Component {
                             </MiniCartParagraph>
                         </div>
                         <MiniCartParagraph
-                            isCart={this.props.isCart}
+                            isCart={isCart}
                             fontFamily="RailwayBold"
                             fontSize={isCart ? '24px' : 'large'}>
-                            {`${this.props.currency} ${product.prices
-                                .find(price => price.currency.symbol === this.props.currency).amount}`}
+                            {`${currency} ${product.prices
+                                .find(price => price.currency.symbol === currency).amount}`}
                         </MiniCartParagraph>
                         <div style={{ display: 'flex' }}>
                             {product.attributes.map((attribute, index) => {
                                 const isSwatch = attribute.type === 'swatch';
-                                const displayValue = attribute.items[this.props.item.attributes[index]].value;
+                                const displayValue = attribute.items[item.attributes[index]].value;
                                 const backgroundColor = isSwatch ? displayValue : 'white';
                                 return <SMIICons backgroundColor={backgroundColor} isCart={isCart}>
                                     {isSwatch ? '' : displayValue}
@@ -57,15 +58,15 @@ class MiniCartItem extends React.Component {
                 </MiniCartLeftCAndMiddleColumnDiv>
                 <div style={{ display: 'flex' }}>
                     <MiniCartPlusMinusSquares>
-                        <NakedButton onClick={() => { this.props.increaseProductQuantity(this.props.item.id) }}>
+                        <NakedButton onClick={() => { increaseProductQuantity(item.id) }}>
                             <img style={{ width: isCart ? '40px' : '32px' }} src={plusSquare} alt="minus square" />
                         </NakedButton>
-                        <p>{this.props.item.quantity}</p>
+                        <p>{item.quantity}</p>
                         <NakedButton onClick={() => {
-                            if (this.props.item.quantity > 1) {
-                                this.props.decreaseProductQuantity(this.props.item.id)
+                            if (item.quantity > 1) {
+                                decreaseProductQuantity(item.id)
                             } else {
-                                this.props.removeProduct(this.props.item.id)
+                                removeProduct(item.id)
                             }
                         }}>
                             <img style={{ width: isCart ? '40px' : '32px' }} src={minusSquare} alt="minus square" />

@@ -8,25 +8,21 @@ import { showOverlay } from '../../redux/ui/ui';
 
 
 
-class CartButton extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showMiniCart: false
-        }
-    }
+class CartButton extends React.PureComponent {
 
     render = () => {
+
+        const { showOverlayNow, cartItemsLength, showOverlay } = this.props;
+
         return <div>
             <NakedButton onClick={() => {
-                this.setState({ showMiniCart: !this.state.showMiniCart });
-                this.props.showOverlay(!this.state.showMiniCart);
+                showOverlayNow(!this.props.showOverlay);
             }}>
-                {this.props.cartItemsLength > 0 && (<Badge>{this.props.cartItemsLength}</Badge>)}
+                {cartItemsLength > 0 && (<Badge>{cartItemsLength}</Badge>)}
                 <img src={emptyCartLogo} alt="empty cart" />
             </NakedButton>
             {
-                this.state.showMiniCart && <MiniCart />
+                showOverlay && <MiniCart />
             }
         </div>
 
@@ -43,7 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        showOverlay: (show) => dispatch(showOverlay(show))
+        showOverlayNow: (show) => dispatch(showOverlay(show))
     }
 }
 
