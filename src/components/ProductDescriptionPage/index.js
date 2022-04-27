@@ -18,6 +18,7 @@ class ProductDescriptionPage extends React.PureComponent {
     render() {
         const { id } = this.props.params;
         const PRODUCT = productQuery(id);
+        const { activeImageIndex } = this.state;
         return (
             <Query query={PRODUCT}>
                 {({ loading, error, data }) => {
@@ -35,7 +36,7 @@ class ProductDescriptionPage extends React.PureComponent {
                                     })
                                 }
                             </SideImagesDiv>
-                            <ManinImage src={data.product.gallery[this.state.activeImageIndex]} alt="item" />
+                            <ManinImage src={data.product.gallery[activeImageIndex]} alt="item" />
                             <Detail product={data.product} />
                         </PageWrapper>
                     )

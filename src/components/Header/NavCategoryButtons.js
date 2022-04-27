@@ -27,6 +27,10 @@ class NavCategoryButtons extends React.PureComponent {
     }
 
     render = () => {
+
+        const { activeIndex } = this.state;
+        const { changeCategory, navigate } = this.props;
+
         return <NavULWrapper>
             <Query query={CATEGORIES}>
                 {({ loading, error, data }) => {
@@ -37,14 +41,14 @@ class NavCategoryButtons extends React.PureComponent {
                         return (
 
                             <NavLIWrapper key={index}>
-                                <ActiveButton active={this.state.activeIndex === index}
+                                <ActiveButton active={activeIndex === index}
                                     onClick={() => {
                                         this.setState({ activeIndex: index });
-                                        this.props.changeCategory(category.name);
-                                        this.props.navigate('/');
+                                        changeCategory(category.name);
+                                        navigate('/');
                                     }}>
                                     {category.name.toUpperCase()}
-                                    {this.state.activeIndex === index ? <ActiveHR /> : null}
+                                    {activeIndex === index ? <ActiveHR /> : null}
                                 </ActiveButton>
                             </NavLIWrapper>
                         )
