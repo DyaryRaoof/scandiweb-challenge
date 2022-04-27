@@ -42,21 +42,36 @@ class MiniCartItem extends React.PureComponent {
                             {`${currency} ${product.prices
                                 .find(price => price.currency.symbol === currency).amount}`}
                         </MiniCartParagraph>
-                        <div style={{ display: 'flex' }}>
+                        <div>
                             {product.attributes.map((attribute, index) => {
-                                const isSwatch = attribute.type === 'swatch';
-                                const displayValue = attribute.items[item.attributes[index]].value;
-                                const backgroundColor = isSwatch ? displayValue : 'white';
-                                return <SMIICons backgroundColor={backgroundColor} isCart={isCart}>
-                                    {isSwatch ? '' : displayValue}
-                                </SMIICons>
+                                return <div style={{ marginTop: '5px' }}>
+                                    <MiniCartParagraph>{attribute.name}</MiniCartParagraph>
+                                    <div style={{ display: 'flex' }}>
+                                        {attribute.items.map((attributeItem, indexOfItem) => {
+                                            const isSwatch = attribute.type === 'swatch';
+                                            let backgroundColor = 'white';
+                                            let color = 'black';
+                                            if (isSwatch) {
+                                                backgroundColor = attributeItem.displayValue;
+                                            } else {
+                                                if (indexOfItem === item.attributes[index]) {
+                                                    backgroundColor = 'black';
+                                                    color = 'white';
+                                                }
+                                            }
+                                            return <div style={indexOfItem === item.attributes[index] && isSwatch ? { border: '2px solid green', padding: '1px' } : {}}>
+                                                <SMIICons backgroundColor={backgroundColor} color={color} isCart={isCart}>
+                                                    {isSwatch ? '' : attributeItem.value}
+                                                </SMIICons>
+                                            </div>
+                                        })}
+                                    </div>
+
+                                </div>
                             })}
 
                         </div>
                     </MiniCartRightColumnDiv>
-
-                </MiniCartLeftCAndMiddleColumnDiv>
-                <div style={{ display: 'flex' }}>
                     <MiniCartPlusMinusSquares>
                         <NakedButton onClick={() => { increaseProductQuantity(item.id) }}>
                             <img style={{ width: isCart ? '40px' : '32px' }} src={plusSquare} alt="minus square" />
@@ -72,9 +87,12 @@ class MiniCartItem extends React.PureComponent {
                             <img style={{ width: isCart ? '40px' : '32px' }} src={minusSquare} alt="minus square" />
                         </NakedButton>
                     </MiniCartPlusMinusSquares>
-                    <img style={{ width: isCart ? '200px' : '120px', height: isCart ? '200px' : '140px', objectFit: 'cover', objectPosition: '0% 0%' }} src={product.gallery[0]} alt="plus-square-icon" />
+                </MiniCartLeftCAndMiddleColumnDiv>
+                <div style={{ display: 'flex' }}>
+
+                    <img style={{ width: isCart ? '200px' : '100px', height: isCart ? '230px' : '150px', objectFit: 'cover', objectPosition: '0% 0%' }} src={product.gallery[0]} alt="plus-square-icon" />
                 </div>
-            </MiniCartItemDiv>
+            </MiniCartItemDiv >
         )
     }
 }
