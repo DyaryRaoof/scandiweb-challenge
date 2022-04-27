@@ -11,12 +11,13 @@ const UnderLineDiv = styled.div`
 
 class Cart extends React.PureComponent {
     render = () => {
+        const { currency } = this.props;
         return <div style={{ marginRight: '300px', marginLeft: '130px' }}>
             <h1 style={{ fontFamily: 'RailwayBold' }}>CART</h1>
             {
                 this.props.cartItems.map((item, index) => {
                     return <div>
-                        <MiniCartItem key={index} item={item} currency={this.props.currency} isCart />
+                        <MiniCartItem key={index} item={item} currency={currency} isCart />
                         <UnderLineDiv />
                     </div>
                 })

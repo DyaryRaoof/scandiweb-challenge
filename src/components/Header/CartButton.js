@@ -11,15 +11,18 @@ import { showOverlay } from '../../redux/ui/ui';
 class CartButton extends React.PureComponent {
 
     render = () => {
+
+        const { showOverlayNow, cartItemsLength, showOverlay } = this.props;
+
         return <div>
             <NakedButton onClick={() => {
-                this.props.showOverlayNow(!this.props.showOverlay);
+                showOverlayNow(!this.props.showOverlay);
             }}>
-                {this.props.cartItemsLength > 0 && (<Badge>{this.props.cartItemsLength}</Badge>)}
+                {cartItemsLength > 0 && (<Badge>{cartItemsLength}</Badge>)}
                 <img src={emptyCartLogo} alt="empty cart" />
             </NakedButton>
             {
-                this.props.showOverlay && <MiniCart />
+                showOverlay && <MiniCart />
             }
         </div>
 

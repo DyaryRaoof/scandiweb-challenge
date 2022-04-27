@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from "../withRouter";
 import { Interweave } from 'interweave';
 
-class Detail extends React.Component {
+class Detail extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,22 +15,26 @@ class Detail extends React.Component {
     }
 
     handleAddToCart = (product) => {
+        const { params, addItemToCart, cartItems } = this.props;
+        const { activeAttributes } = this.state;
+
         const cartItem = {
-            id: this.props.params,
+            id: params,
             quantity: 1,
             product: product,
-            attributes: this.state.activeAttributes,
+            attributes: activeAttributes,
 
         };
 
 
-        if (!this.props.cartItems.map(item => item.id).includes(this.props.params)) {
-            this.props.addItemToCart(cartItem);
+        if (!cartItems.map(item => item.id).includes(params)) {
+            addItemToCart(cartItem);
         }
 
     }
 
     setAttributeDivProperties = (item, attribute, indexOfAttribute, indexOfItem) => {
+        const { activeAttributes } = this.state;
         let backgroundColor = 'white';
         let color = 'black';
         let value = item.value;
@@ -38,14 +42,14 @@ class Detail extends React.Component {
         if (attribute.type === 'swatch') {
             backgroundColor = item.value;
             value = '';
-            if (this.state.activeAttributes[indexOfAttribute] === indexOfItem) {
+            if (activeAttributes[indexOfAttribute] === indexOfItem) {
                 border = '1px solid black';
             } else {
                 border = 'none';
             }
         } else {
-            if (this.state.activeAttributes) {
-                if (this.state.activeAttributes[indexOfAttribute] === indexOfItem) {
+            if (activeAttributes) {
+                if (activeAttributes[indexOfAttribute] === indexOfItem) {
                     color = 'white';
                     backgroundColor = 'black';
                 }
@@ -57,12 +61,14 @@ class Detail extends React.Component {
     }
 
     render = () => {
-        const price = this.props.product.prices.find(price => price.currency.symbol === this.props.currency);
+        const { product, currency } = this.props;
+        const price = product.prices.find(price => price.currency.symbol === currency);
+
         return (
             <DescriptionWrappper>
-                <h1 style={{ margin: 0 }}>{this.props.product.name}</h1>
-                <p style={{ fontSize: '30px', margin: 0 }}>{this.props.product.brand}</p>
-                {this.props.product.attributes.map((attribute, indexOfAttribute) => {
+                <h1 style={{ margin: 0 }}>{product.name}</h1>
+                <p style={{ fontSize: '30px', margin: 0 }}>{product.brand}</p>
+                {product.attributes.map((attribute, indexOfAttribute) => {
 
                     return <div key={indexOfAttribute}>
                         <p style={{ fontSize: '30px', fontFamily: 'RobotoCondesedBold', marginBottom: '10px' }}>{attribute.name}:</p>
@@ -100,15 +106,15 @@ class Detail extends React.Component {
                     {`${price.currency.symbol} ${price.amount}`}
                 </PriceParagraph>
                 <AddToCartButton onClick={() => {
-                    if (this.props.product.inStock) {
-                        this.handleAddToCart(this.props.product);
+                    if (product.inStock) {
+                        this.handleAddToCart(product);
                     }
                 }}>
                     ADD TO CART
                 </AddToCartButton>
 
                 <div>
-                    <Interweave content={this.props.product.description} />
+                    <Interweave content={product.description} />
                 </div>
             </DescriptionWrappper>
         )

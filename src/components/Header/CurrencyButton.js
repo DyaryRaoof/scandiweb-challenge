@@ -23,25 +23,27 @@ class CurrencyButton extends React.PureComponent {
     }
 
     render() {
+        const { showCurrenciesDropDown, currentCurrency } = this.state;
+        const { changeCurrency } = this.props;
         return (
             <CartAndCurrecyWrapper>
                 <NavDropDownULWrapper>
                     <NavButton onClick={
                         () => {
-                            this.setState({ showCurrenciesDropDown: !this.state.showCurrenciesDropDown });
+                            this.setState({ showCurrenciesDropDown: !showCurrenciesDropDown });
                         }}>
                         <CurrencyWrapper>
-                            {this.state.currentCurrency}
+                            {currentCurrency}
                         </CurrencyWrapper>
                         <DropdownImage src={navDropdown} alt="dropdown" />
                     </NavButton>
                     <CartButton />
                 </NavDropDownULWrapper>
                 <CurrencyDropDown
-                    showCurrenciesDropDown={this.state.showCurrenciesDropDown}
+                    showCurrenciesDropDown={showCurrenciesDropDown}
                     currencyChanged={(currency) => {
                         this.handleCurrencyChanged(currency);
-                        this.props.changeCurrency(currency);
+                        changeCurrency(currency);
                     }
                     } />
             </CartAndCurrecyWrapper>

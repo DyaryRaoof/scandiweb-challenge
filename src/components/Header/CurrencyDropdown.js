@@ -22,6 +22,8 @@ class CurrencyDropDown extends React.PureComponent {
     }
 
     render = () => {
+        const { currencyChanged } = this.props;
+
         if (this.props.showCurrenciesDropDown) {
             return <NavCurrencyDropdown>
                 <Query query={CURRENCIES}>
@@ -31,7 +33,7 @@ class CurrencyDropDown extends React.PureComponent {
 
                         return data.currencies.map((currency, index) => {
                             return (
-                                <NakedButton key={index} onClick={() => { this.props.currencyChanged(currency.symbol) }}>
+                                <NakedButton key={index} onClick={() => { currencyChanged(currency.symbol) }}>
                                     <p >{`${currency.symbol} ${currency.label}`}</p>
                                 </NakedButton>
                             )
