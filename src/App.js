@@ -24,13 +24,13 @@ const OverlayDiv = styled.div`
 class App extends React.PureComponent {
 
   render() {
-    const { showOverlayNow } = this.props;;
+    const { showOverlayNow, showOverlay } = this.props;;
 
     return (
-      <div style={this.props.showOverlay ? { overflow: 'hidden', height: '98vh' } : {}}>
+      <div style={showOverlay ? { overflow: 'hidden', height: '98vh' } : {}}>
         <Router>
           <Header />
-          {this.props.showOverlay && <OverlayDiv onClick={() => { showOverlayNow(false) }} />}
+          {showOverlay && <OverlayDiv onClick={() => { showOverlayNow(false) }} />}
           <Routes>
             <Route path="/" element={<ProductListPage />} />
             <Route path="/product-description/:id" element={<ProductDescriptionPage />} />
