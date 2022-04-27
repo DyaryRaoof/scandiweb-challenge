@@ -7,6 +7,7 @@ import ProductDescriptionPage from './components/ProductDescriptionPage';
 import Cart from './components/Cart';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { showOverlay } from './redux/ui/ui';
 
 const OverlayDiv = styled.div`
     position: fixed;
@@ -23,11 +24,13 @@ const OverlayDiv = styled.div`
 class App extends React.Component {
 
   render() {
+    const { showOverlayNow } = this.props;;
+
     return (
       <div style={this.props.showOverlay ? { overflow: 'hidden', height: '98vh' } : {}}>
         <Router>
           <Header />
-          {this.props.showOverlay && <OverlayDiv />}
+          {this.props.showOverlay && <OverlayDiv onClick={() => { showOverlayNow(false) }} />}
           <Routes>
             <Route path="/" element={<ProductListPage />} />
             <Route path="/product-description/:id" element={<ProductDescriptionPage />} />
@@ -45,4 +48,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchTOProps = (dispatch) => {
+  return {
+    showOverlayNow: (show) => dispatch(showOverlay(show)),
+  }
+}
+
+
+
+
+export default connect(mapStateToProps, mapDispatchTOProps)(App);
