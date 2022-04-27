@@ -8,28 +8,29 @@ import { withRouter } from '../withRouter';
 
 
 
-class ProductListPage extends React.Component {
+class ProductListPage extends React.PureComponent {
     render() {
 
-        const CATEGORY = categoryQuery(this.props.categoryName)
+        const { categoryName, currency, navigate } = this.props;
+        const CATEGORY = categoryQuery(categoryName);
 
         return (
             <PageWrapper>
-                <h1>{this.props.categoryName}</h1>
+                <h1>{categoryName.toUpperCase()}</h1>
                 <ItemsWrapper>
                     <Query query={CATEGORY}>
                         {({ loading, error, data }) => {
                             if (loading) return <p>Loading...</p>;
                             if (error) return <p>Error :(</p>;
                             return data.category.products.map((product) => {
-                                const price = product.prices.find(price => price.currency.symbol === this.props.currency);
+                                const price = product.prices.find(price => price.currency.symbol === currency);
                                 return (
 
                                     <ItemCard key={product.id}>
                                         <OutOfStockDiv>
                                             <OutOfStockHeader inStock={product.inStock}>{!product.inStock ? 'Out of stock' : ''}</OutOfStockHeader>
                                             <div style={{ zIndex: 1 }}>
-                                                <ItemCardButton onClick={() => { this.props.navigate(`/product-description/${product.id}`) }} inStock={product.inStock}>
+                                                <ItemCardButton onClick={() => { navigate(`/product-description/${product.id}`) }} inStock={product.inStock}>
                                                     <ItemImage src={product.gallery[0]} alt="item" />
                                                     <p style={{ textAlign: 'left', width: '100%', fontFamily: 'RailwayThin' }}>{product.name}</p>
                                                     <p

@@ -7,6 +7,7 @@ import { Query } from "@apollo/react-components";
 import { gql } from "@apollo/client";
 import { changeCategory } from '../../redux/ui/ui';
 import { connect } from 'react-redux';
+import { withRouter } from '../withRouter';
 
 const CATEGORIES = gql`
     query  {
@@ -16,7 +17,7 @@ const CATEGORIES = gql`
     }
   `;
 
-class NavCategoryButtons extends React.Component {
+class NavCategoryButtons extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -26,6 +27,10 @@ class NavCategoryButtons extends React.Component {
     }
 
     render = () => {
+
+        const { activeIndex } = this.state;
+        const { changeCategory, navigate } = this.props;
+
         return <NavULWrapper>
             <Query query={CATEGORIES}>
                 {({ loading, error, data }) => {
@@ -36,13 +41,14 @@ class NavCategoryButtons extends React.Component {
                         return (
 
                             <NavLIWrapper key={index}>
-                                <ActiveButton active={this.state.activeIndex === index}
+                                <ActiveButton active={activeIndex === index}
                                     onClick={() => {
                                         this.setState({ activeIndex: index });
-                                        this.props.changeCategory(category.name);
+                                        changeCategory(category.name);
+                                        navigate('/');
                                     }}>
                                     {category.name.toUpperCase()}
-                                    {this.state.activeIndex === index ? <ActiveHR /> : null}
+                                    {activeIndex === index ? <ActiveHR /> : null}
                                 </ActiveButton>
                             </NavLIWrapper>
                         )
@@ -66,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavCategoryButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavCategoryButtons));

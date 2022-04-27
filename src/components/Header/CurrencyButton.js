@@ -6,7 +6,7 @@ import CartButton from './CartButton';
 import { changeCurrency } from '../../redux/ui/ui';
 import { connect } from 'react-redux';
 
-class CurrencyButton extends React.Component {
+class CurrencyButton extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,25 +23,27 @@ class CurrencyButton extends React.Component {
     }
 
     render() {
+        const { showCurrenciesDropDown, currentCurrency } = this.state;
+        const { changeCurrency } = this.props;
         return (
             <CartAndCurrecyWrapper>
                 <NavDropDownULWrapper>
                     <NavButton onClick={
                         () => {
-                            this.setState({ showCurrenciesDropDown: !this.state.showCurrenciesDropDown });
+                            this.setState({ showCurrenciesDropDown: !showCurrenciesDropDown });
                         }}>
                         <CurrencyWrapper>
-                            {this.state.currentCurrency}
+                            {currentCurrency}
                         </CurrencyWrapper>
                         <DropdownImage src={navDropdown} alt="dropdown" />
                     </NavButton>
                     <CartButton />
                 </NavDropDownULWrapper>
                 <CurrencyDropDown
-                    showCurrenciesDropDown={this.state.showCurrenciesDropDown}
+                    showCurrenciesDropDown={showCurrenciesDropDown}
                     currencyChanged={(currency) => {
                         this.handleCurrencyChanged(currency);
-                        this.props.changeCurrency(currency);
+                        changeCurrency(currency);
                     }
                     } />
             </CartAndCurrecyWrapper>
