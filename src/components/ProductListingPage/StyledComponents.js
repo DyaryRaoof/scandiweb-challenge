@@ -1,54 +1,53 @@
 import styled from 'styled-components';
 import NakedButton from '../Shared/StyledComponents/NakedButton';
 
-
 export const PageWrapper = styled.div`
   margin: 0 110px;
-  `
+`;
 export const ItemCard = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px;
-    padding: 20px;
-    background-color: #fff;
-    &:hover {
-        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-        border-radius: 5px;
-    };
-    max-width: 300px;
-    max-height: 300px;
-    `
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  padding: 20px;
+  background-color: #fff;
+  &:hover {
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    border-radius: 5px;
+  }
+  width: 300px;
+  height: 300px;
+`;
 
 export const ItemsWrapper = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
-    align-items: center;
-    `
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+`;
 
 export const ItemImage = styled.img`
-        overflow: hidden;
-        object-fit: contain;
-        width: 280px;
-        height: 280px;
-        `
+  overflow: hidden;
+  object-fit: contain;
+  width: 250px;
+  height: 250px;
+`;
 
 export const OutOfStockDiv = styled.div`
-    font-size: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    `
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const ItemCardButton = styled(NakedButton)`
-    opacity: ${props => !props.inStock ? 0.5 : 1};
-`
+  opacity: ${(props) => (!props.inStock ? 0.5 : 1)};
+`;
 
 export const OutOfStockHeader = styled.h1`
-    z-index: 100;
-    position: absolute;
-    opacity: ${props => props.inStock ? 1 : 0.5};
-    color: gray;
-`
+  z-index: 100;
+  position: absolute;
+  opacity: ${(props) => (props.inStock ? 1 : 0.5)};
+  color: gray;
+`;
