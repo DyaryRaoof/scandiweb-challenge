@@ -4,6 +4,7 @@ import NakedButton from "../Shared/StyledComponents/NakedButton";
 import { addProduct } from "../../redux/cart/cart";
 import { connect } from "react-redux";
 import { withRouter } from "../withRouter";
+import { Interweave } from 'interweave';
 
 class Detail extends React.Component {
     constructor(props) {
@@ -105,7 +106,10 @@ class Detail extends React.Component {
                 }}>
                     ADD TO CART
                 </AddToCartButton>
-                <div dangerouslySetInnerHTML={{ __html: this.props.product.description }} />
+
+                <div>
+                    <Interweave content={this.props.product.description} />
+                </div>
             </DescriptionWrappper>
         )
     }
