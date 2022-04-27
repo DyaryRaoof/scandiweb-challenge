@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { decreaseProductQuantity, increaseProductQuantity, removeProduct } from '../../redux/cart/cart';
 import NakedButton from '../Shared/StyledComponents/NakedButton';
 
-class MiniCartItem extends React.Component {
+class MiniCartItem extends React.PureComponent {
     render = () => {
         const product = this.props.item.product;
         const isCart = this.props.isCart;

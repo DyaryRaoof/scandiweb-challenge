@@ -8,7 +8,7 @@ import { showOverlay } from '../../redux/ui/ui';
 
 
 
-class CartButton extends React.Component {
+class CartButton extends React.PureComponent {
 
     render = () => {
         return <div>

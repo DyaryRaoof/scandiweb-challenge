@@ -8,7 +8,7 @@ import { withRouter } from '../withRouter';
 
 
 
-class ProductListPage extends React.Component {
+class ProductListPage extends React.PureComponent {
     render() {
 
         const CATEGORY = categoryQuery(this.props.categoryName)

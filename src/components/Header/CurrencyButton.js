@@ -6,7 +6,7 @@ import CartButton from './CartButton';
 import { changeCurrency } from '../../redux/ui/ui';
 import { connect } from 'react-redux';
 
-class CurrencyButton extends React.Component {
+class CurrencyButton extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {

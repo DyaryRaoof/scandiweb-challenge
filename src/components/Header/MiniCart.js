@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { decreaseProductQuantity, increaseProductQuantity } from "../../redux/cart/cart";
 import { withRouter } from "../withRouter";
 
-class MiniCart extends React.Component {
+class MiniCart extends React.PureComponent {
     getTotalPrice = () => {
         if (this.props.cartItems) {
             const products = this.props.cartItems.map(item => item.product);

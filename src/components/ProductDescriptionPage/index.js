@@ -6,7 +6,7 @@ import NakedButton from '../Shared/StyledComponents/NakedButton';
 import Detail from './Detail';
 import { PageWrapper, SideImage, ManinImage, SideImagesDiv } from './IndexStyledComponents';
 
-class ProductDescriptionPage extends React.Component {
+class ProductDescriptionPage extends React.PureComponent {
 
     constructor(props) {
         super(props);

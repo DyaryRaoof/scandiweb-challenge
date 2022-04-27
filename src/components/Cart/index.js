@@ -9,7 +9,7 @@ const UnderLineDiv = styled.div`
     margin: 10px 0;
 `
 
-class Cart extends React.Component {
+class Cart extends React.PureComponent {
     render = () => {
         return <div style={{ marginRight: '300px', marginLeft: '130px' }}>
             <h1 style={{ fontFamily: 'RailwayBold' }}>CART</h1>

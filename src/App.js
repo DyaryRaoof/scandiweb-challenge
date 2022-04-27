@@ -21,7 +21,7 @@ const OverlayDiv = styled.div`
 `;
 
 
-class App extends React.Component {
+class App extends React.PureComponent {
 
   render() {
     const { showOverlayNow } = this.props;;

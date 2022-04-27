@@ -17,7 +17,7 @@ const CATEGORIES = gql`
     }
   `;
 
-class NavCategoryButtons extends React.Component {
+class NavCategoryButtons extends React.PureComponent {
 
     constructor(props) {
         super(props);

@@ -7,7 +7,7 @@ import CurrencyButton from './CurrencyButton';
 import LogoLI from './StyledComponents/LogoLI';
 
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
 
     render() {
         return (
