@@ -1,6 +1,7 @@
 ## Scandiweb Challenge
 this project was created as an assignment from the Scandiweb comapny
 to make sure it works correctly you need the GraphQL back end located here: 
+
 https://github.com/scandiweb/junior-react-endpoint
 
 ## Run The App
